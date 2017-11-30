@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="well">
+    <h3>Search video</h3>
+    <input type="text" [(ngModel)]="queryStr" class="form-control">
+    <br>
+    <button class="btn btn-primary btn-block" (click)="Search()">Search</button>
+  </div>
+  <div class="well col-sm-12">
+    <div class="col-sm-4" *ngFor="let video of videos" style="margin-bottom: 10px; ">
+      <a (click)="setVideoId(video.id.videoId, video.snippet.title)" data-toggle="modal" data-target="#myModal">
+        <img [src]=video.snippet.thumbnails.medium.url alt="">
+      </a>
+      <h5>{{video.snippet.title}}</h5>
+      <!--<iframe [src]="getVideoSource(video.id.videoId)" frameborder="1" allowfullscreen></iframe>-->
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{videoTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <iframe
+          width="560"
+          height="315"
+          [src]=videoUrl
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success" (click)="addToLike(videoId)" *ngIf="signInStatus">Add To Like</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

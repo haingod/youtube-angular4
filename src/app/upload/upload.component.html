@@ -1,0 +1,26 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h3>Upload Your Video</h3>
+  <div class="well">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control" [(ngModel)]="title">
+    </div>
+    <div class="form-group">
+      <label>Subscription</label>
+      <textarea class="form-control" [(ngModel)]="description"></textarea>
+    </div>
+
+    <input type="file" (change)="fileChangeEvent($event)" placeholder="Upload file..." class="form-control"/>
+    <input *ngIf="location" class="btn btn-primary uploadBtn pull-right" type="button" (click)="upload()" value="Upload" id="btnSend"/>
+  </div>
+  <div class="well" *ngIf="recentUploadId">
+    <iframe
+      width="100%"
+      height="400"
+      [src]=recentUploadId
+      frameborder="0"
+      allowfullscreen
+    ></iframe>
+  </div>
+</div>
